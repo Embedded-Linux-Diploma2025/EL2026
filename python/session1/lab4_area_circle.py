@@ -1,11 +1,15 @@
 """Write a Python program which accepts the radius of a circle and compute the area."""
 
 
+
 def area(number1):
     """
     Write a Python program which accepts the radius of a circle from the argument
     and compute the area. Don't forget to return the result at the end.
     """
+    result = 3.14159265358979323*float(number1 * number1)
+    return result
+
 
 
 if __name__ == "__main__":
