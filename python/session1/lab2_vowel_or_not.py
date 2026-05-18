@@ -1,8 +1,13 @@
 """Write a Python program to test whether a passed letter is a vowel or not."""
 
 
-def vowel(letter):
+def vowel(letter : str) -> bool:
     """Write your solution here. Don't forget to return the result at the end."""
+    vowels = ["a","e","i","o","u"]
+    for ele in vowels:
+        if letter.lower() == ele:
+            return True
+    return False
 
 
 if __name__ == "__main__":
