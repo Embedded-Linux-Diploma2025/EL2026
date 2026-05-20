@@ -1,7 +1,7 @@
 """Write a Python program to count the number 4 in a given list."""
 
 
-def count(lst) -> int:
+def count(lst):
     """Write your solution here. Don't forget to return the result at the end...."""
        counted_value=lst.count(4)
        return counted_value  
