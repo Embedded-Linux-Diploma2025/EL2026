@@ -48,6 +48,24 @@ def remove_vowels_set(text:str):
     #DISCUSS: risk of scrambling the original text, since set is unordered
     return str(set1.difference(vowels))
 
+def find_common_friends(friend_list:dict):
+    """Find common friends between all given friends in the dictionary.
+    
+    Args:
+        friend_list (dict): Keys has the name of the account, the values is a set of friends
+        
+    Returns:
+        dictionary with the same Keys, but the value another dict with the key as the other person
+        and the value is a set of mutual friends
+    """
+    all_mutual_friends = {}
+    for person1 in friend_list:
+        all_mutual_friends[person1] = {}
+        for person2 in friend_list:
+            if person1 != person2:
+                mutual_friends = friend_list[person1].intersection(friend_list[person2])
+                all_mutual_friends[person1][person2] = mutual_friends
+    return all_mutual_friends
 
 if __name__ == "__main__":
     # Test cases
@@ -72,5 +90,23 @@ if __name__ == "__main__":
         "Bob": {"Alice", "Charlie", "Eve"},
         "Charlie": {"Alice", "Bob", "Frank"},
     }
+
+    result = find_common_friends(friends)
+    expected = {
+    "Alice": {
+        "Bob": {"Charlie"},
+        "Charlie": {"Bob"}
+    },
+    "Bob": {
+        "Alice": {"Charlie"},
+        "Charlie": {"Alice"}
+    },
+    "Charlie": {
+        "Alice": {"Bob"},
+        "Bob":{"Alice"}
+    }
+    }
+
+    assert result == expected
 
     print("All tests passed!")
