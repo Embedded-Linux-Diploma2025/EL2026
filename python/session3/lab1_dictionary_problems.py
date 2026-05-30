@@ -1,7 +1,7 @@
 """Dictionary Problems - Testing student capability with dictionary operations."""
+import collections
 
-
-def dictionary_operations(dict1, dict2):
+def dictionary_operations(dict1:dict, dict2:dict):
     """Perform basic operations on two dictionaries.
 
     Args:
@@ -12,6 +12,14 @@ def dictionary_operations(dict1, dict2):
         dict: Dictionary with merged, common_keys, and unique_keys
     """
     # Write your solution here
+    set1 = set(dict1)
+    set2 = set(dict2)
+    common = set1.intersection(set2)
+    unique_1 = set1.difference(set2)
+    unique_2 = set2.difference(set1)
+    unique = unique_1.union(unique_2)
+    dict1.update(dict2)
+    return {'merged':dict1, 'common_keys':common, 'unique_keys':unique}
 
 
 def count_word_frequency(text):
@@ -24,9 +32,17 @@ def count_word_frequency(text):
         dict: Dictionary with word frequencies
     """
     # Write your solution here
+    # word_dict = {}
+    # for word in text.split():
+    #     if(word in word_dict):
+    #         word_dict[word]+=1
+    #     else:
+    #         word_dict[word] = 1
+    return collections.Counter(text.split())
 
 
-def dictionary_filtering(students_grades):
+
+def dictionary_filtering(students_grades:dict):
     """Filter students based on their grades.
 
     Args:
@@ -36,9 +52,15 @@ def dictionary_filtering(students_grades):
         dict: Dictionary with students who have grades >= 70
     """
     # Write your solution here
+    # filtered_students = {}
+    # for key,value in students_grades.items():
+    #     if(value >=70):
+    #         filtered_students[key] = value
+    # return filtered_students
+    return {name:grade for name,grade in students_grades.items() if grade>=70}
 
 
-def nested_dictionary_access(nested_dict, keys_path):
+def nested_dictionary_access(nested_dict:dict, keys_path):
     """Access value in nested dictionary using a list of keys.
 
     Args:
@@ -49,6 +71,17 @@ def nested_dictionary_access(nested_dict, keys_path):
         any: Value at the specified path, or None if path doesn't exist
     """
     # Write your solution here
+    traverse_dict = nested_dict
+    value = -1
+    for key in keys_path:
+        if not isinstance(traverse_dict,dict):
+            return None
+        value = traverse_dict.get(key)
+        if value is not None:
+            traverse_dict = traverse_dict[key]
+        else:
+            return None
+    return value
 
 
 if __name__ == "__main__":

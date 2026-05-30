@@ -17,6 +17,21 @@ def parse_config_file(file_path):
     pattern = r'^([A-Z_][A-Z0-9_:${}]*)\s*=\s*"([^"]*(?:\\[\s\S]*?)*)"'
 
     """
+    with open(file_path,"r",encoding="utf-8") as f:
+        lines = f.readlines()
+    #keep only lines with equal sign
+    filtered_lines = [line for line in lines if '=' in line]
+    result_dict = {}
+    for line in filtered_lines:
+        #split at the first equal sign
+        key,value = line.split('=',1)
+        #make sure there are no outside trailing spaces
+        key = key.strip()
+        #remove new lines -> remove outside spaces -> remove string characters
+        value = value.replace('\n','').strip().replace('"','')
+        result_dict[key] = value
+    print(result_dict)
+    return result_dict
 
 
 if __name__ == "__main__":
@@ -28,7 +43,7 @@ if __name__ == "__main__":
     # Test assertions
     print("Checking SUMMARY...")
     assert "SUMMARY" in result, "SUMMARY key not found in result"
-    assert result["SUMMARY"] == " hello python", f"Expected ' hello python', got {result['SUMMARY']}"
+    assert result["SUMMARY"]== " hello python", f"Expected ' hello python', got {result['SUMMARY']}"
 
     print("Checking LICENSE...")
     assert "LICENSE" in result, "LICENSE key not found in result"
@@ -37,7 +52,9 @@ if __name__ == "__main__":
     print("Checking SRC_URI...")
     assert "SRC_URI" in result, "SRC_URI key not found in result"
     EXPECTED_SRC_URI = "file://sd-hello.py"
-    assert result["SRC_URI"] == EXPECTED_SRC_URI, f"Expected {EXPECTED_SRC_URI}, got {result['SRC_URI']}"
+    assert result["SRC_URI"] == EXPECTED_SRC_URI, (
+        f"Expected {EXPECTED_SRC_URI}, got {result['SRC_URI']}"
+    )
 
     print("Checking S variable...")
     assert "S" in result, "S key not found in result"
@@ -45,18 +62,25 @@ if __name__ == "__main__":
 
     print("Checking RDEPENDS...")
     assert "RDEPENDS:${PN}" in result, "RDEPENDS:${PN} key not found in result"
-    assert result["RDEPENDS:${PN}"] == "python3 ", f"Expected 'python3 ', got '{result['RDEPENDS:${PN}']}'"
-
+    assert result["RDEPENDS:${PN}"] == "python3 ",(
+        f"Expected 'python3 ', got '{result['RDEPENDS:${PN}']}'"
+    )
     # Check that function definitions and inherit statements are not included
     print("Checking that function definitions are excluded...")
     for _key in result:
-        assert not _key.startswith("do_install"), "Function definition should not be parsed as a _key"
+        assert not _key.startswith("do_install"), (
+            "Function definition should not be parsed as a _key"
+        )
         assert _key != "inherit", "inherit statement should not be parsed as a key"
 
     # Verify expected number of keys
     print("Checking total number of parsed keys...")
     expected_keys = {"SUMMARY", "LICENSE", "SRC_URI", "S", "RDEPENDS:${PN}"}
-    assert len(result) == len(expected_keys), f"Expected {len(expected_keys)} keys, got {len(result)}"
-    assert set(result.keys()) == expected_keys, f"Expected keys {expected_keys}, got {set(result.keys())}"
+    assert len(result) == len(expected_keys),(
+    "Expected {len(expected_keys)} keys, got {len(result)}"
+    )
+    assert set(result.keys()) == expected_keys, (
+    f"Expected keys {expected_keys}, got {set(result.keys())}"
+    )
 
     print("All tests passed!")
