@@ -2,7 +2,8 @@
 
 
 def vowel(letter):
-    """Write your solution here. Don't forget to return the result at the end."""
+    """Return True if letter is a vowel (case-insensitive), False otherwise."""
+    return letter.lower() in "aeiou"
 
 
 if __name__ == "__main__":
