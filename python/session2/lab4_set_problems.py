@@ -1,3 +1,4 @@
+#! /usr/bin/env python3
 """Set Problems - Testing student capability with set operations."""
 
 
@@ -12,6 +13,14 @@ def set_operations(set1: set, set2: set):
         dict: Dictionary with union, intersection, difference
     """
     # Write your solution here
+    union_op = set1.union(set2)
+    intersection_op = set1.intersection(set2)
+    difference_op = set1.difference(set2)
+    return {
+        "union": union_op,
+        "intersection": intersection_op,
+        "difference": difference_op
+    }
 
 
 def find_unique_elements(list1, list2):
@@ -25,7 +34,9 @@ def find_unique_elements(list1, list2):
         tuple: (unique_to_list1, unique_to_list2)
     """
     # Write your solution here
-
+    unique_to_list1 = set(list1) - set(list2)
+    unique_to_list2 = set(list2) - set(list1)
+    return (unique_to_list1, unique_to_list2)
 
 def remove_vowels_set(text):
     """Remove vowels from text using set operations.
@@ -37,6 +48,10 @@ def remove_vowels_set(text):
         str: Text with vowels removed
     """
     # Write your solution here
+    text_set = set(text)
+    vowels = set("aeiouAEIOU")
+    result_set = text_set - vowels
+    return ''.join(result_set)
 
 
 if __name__ == "__main__":
