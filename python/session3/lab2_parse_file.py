@@ -17,7 +17,22 @@ def parse_config_file(file_path):
     pattern = r'^([A-Z_][A-Z0-9_:${}]*)\s*=\s*"([^"]*(?:\\[\s\S]*?)*)"'
 
     """
-
+    with open(file_path) as fileTemp:
+        x = fileTemp.readlines()
+    y = []
+    for line in x:
+        if '='  in line:
+            y.append(line)
+    ret = {}
+    for i in range(len(y)):
+        y[i] = y[i].strip('\n')
+        key,value = y[i].split('=',1)
+        key = key.strip()
+        value = value.strip()
+        if value.startswith('"') and value.endswith('"'):
+            value = value[1:-1]
+        ret[key] = value
+    return ret
 
 if __name__ == "__main__":
     # Get the path to the template_data.txt file

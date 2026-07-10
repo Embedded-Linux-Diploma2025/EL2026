@@ -1,7 +1,7 @@
 """Dictionary Problems - Testing student capability with dictionary operations."""
 
 
-def dictionary_operations(dict1, dict2):
+def dictionary_operations(dict1: dict, dict2: dict):
     """Perform basic operations on two dictionaries.
 
     Args:
@@ -12,9 +12,23 @@ def dictionary_operations(dict1, dict2):
         dict: Dictionary with merged, common_keys, and unique_keys
     """
     # Write your solution here
+    comm = set()
+    uni = set()
+    for i in dict1.keys():
+        if i in dict2:
+            comm.add(i)
+        else:
+            uni.add(i)
+
+    for i in dict2.keys():
+        if i not in dict1:
+            uni.add(i)
+
+    merged = {**dict1, **dict2}
+    return {"merged": merged, "common_keys": comm, "unique_keys": uni}
 
 
-def count_word_frequency(text):
+def count_word_frequency(text: str):
     """Count the frequency of each word in a text string.
 
     Args:
@@ -24,9 +38,14 @@ def count_word_frequency(text):
         dict: Dictionary with word frequencies
     """
     # Write your solution here
+    splt = text.split()
+    ret = {}
+    for i in splt:
+        ret[i] = splt.count(i)
+    return ret
 
 
-def dictionary_filtering(students_grades):
+def dictionary_filtering(students_grades: dict):
     """Filter students based on their grades.
 
     Args:
@@ -35,7 +54,12 @@ def dictionary_filtering(students_grades):
     Returns:
         dict: Dictionary with students who have grades >= 70
     """
+    ret = {}
     # Write your solution here
+    for i, j in students_grades.items():
+        if j >= 70:
+            ret[i] = j
+    return ret
 
 
 def nested_dictionary_access(nested_dict, keys_path):
@@ -49,6 +73,13 @@ def nested_dictionary_access(nested_dict, keys_path):
         any: Value at the specified path, or None if path doesn't exist
     """
     # Write your solution here
+    x = nested_dict
+    for i in keys_path:
+        if isinstance(x, dict) and i in x:
+            x = x.get(i)
+        else:
+            return None
+    return x
 
 
 if __name__ == "__main__":
@@ -80,3 +111,4 @@ if __name__ == "__main__":
     assert result is None, f"Expected None, got {result}"
 
     print("All tests passed!")
+    
