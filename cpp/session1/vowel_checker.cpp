@@ -2,10 +2,27 @@
 #include <iostream>
 
 bool isVowel(char letter) {
-  // write your solution here...
-  // Hint: Check if the letter is 'a', 'e', 'i', 'o', 'u' (both uppercase and
-  // lowercase)
-  return false;
+  bool answer = false;
+  switch (letter)
+  {
+      case 'a':
+      case 'i':
+      case 'o':
+      case 'u':
+      case 'e':
+      case 'A':
+      case 'I':
+      case 'O':
+      case 'U':
+      case 'E':
+      answer = true;
+      break;
+      default:
+      answer = false;
+      break;
+  }
+
+  return answer;
 }
 
 int main() {

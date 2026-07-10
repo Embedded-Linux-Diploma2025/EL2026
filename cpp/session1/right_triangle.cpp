@@ -1,11 +1,50 @@
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+#include<limits>
+#include<cmath>
+
+int getMax(int num1,int num2,int num3)
+{
+    int max = std::numeric_limits<int>::min();
+    if(max < num1)
+    {
+        max = num1;
+    }
+    if(max < num2)
+    {
+        max = num2;
+    }
+    if(max < num3)
+    {
+        max = num3;
+    }
+
+    return max;
+}
+
+int ipow(int base,int exponent)
+{
+    return static_cast<int>(pow(base,exponent));
+}
 
 bool isRightTriangle(int a, int b, int c) {
-  // write your solution here...
-  // Hint: Use Pythagorean theorem: a² + b² = c² (where c is the largest side)
-  return 0;
+  unsigned int max = getMax(a,b,c);
+  bool answer = false;
+  if(a == max)
+  {
+    answer = ipow(a,2) == (ipow(b,2) + ipow(c,2));
+  }
+  else if(b == max)
+  {
+    answer = ipow(b,2) == (ipow(a,2) + ipow(c,2));
+  }
+  else
+  {
+    answer = ipow(c,2) == (ipow(b,2) + ipow(a,2));
+  }
+
+  return answer;
 }
 
 int main() {
