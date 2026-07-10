@@ -2,10 +2,42 @@
 #include <cassert>
 #include <iostream>
 
+int getMaximum(int a, int b, int c) {
+  // write your solution here...
+  int result;
+  result  = std:: max(a,b);
+  result = std::max(result,c);
+  return result;
+}
+
 bool isRightTriangle(int a, int b, int c) {
   // write your solution here...
   // Hint: Use Pythagorean theorem: a² + b² = c² (where c is the largest side)
-  return 0;
+  bool ret = false;
+  int result = getMaximum(a,b,c);
+  int sum;
+  if(result == a)
+  {
+    sum = (c*c) + (b*b);
+  }
+  else if (result == b)
+  {
+    sum = (c*c) + (a*a);
+  }
+  else
+  {
+    sum = (a*a) + (b*b);
+  }
+  result = result * result;
+  if(result == sum)
+  {
+      ret = true;
+  }
+  else
+  {
+    
+  }
+  return ret;
 }
 
 int main() {
