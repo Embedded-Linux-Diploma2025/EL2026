@@ -1,9 +1,23 @@
 #include <cassert>
 #include <iostream>
+#include<limits>
 
 int getMaximum(int a, int b, int c) {
-  // write your solution here...
-  return 0;
+  int max = std::numeric_limits<int>::min();
+  if(max < a)
+  {
+    max = a;
+  }
+  if(max < b)
+  {
+    max = b;
+  }
+  if(max < c)
+  {
+    max = c;
+  }
+
+  return max;
 }
 
 int main() {
