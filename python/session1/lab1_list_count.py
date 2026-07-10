@@ -1,8 +1,9 @@
 """Write a Python program to count the number 4 in a given list."""
 
 
-def count(lst):
+def count(lst: list):
     """Write your solution here. Don't forget to return the result at the end...."""
+    return lst.count(4)
 
 
 if __name__ == "__main__":
