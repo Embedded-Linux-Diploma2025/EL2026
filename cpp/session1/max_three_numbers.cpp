@@ -3,7 +3,10 @@
 
 int getMaximum(int a, int b, int c) {
   // write your solution here...
-  return 0;
+  int result;
+  result  = std:: max(a,b);
+  result = std::max(result,c);
+  return result;
 }
 
 int main() {

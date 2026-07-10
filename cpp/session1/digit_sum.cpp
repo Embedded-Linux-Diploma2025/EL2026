@@ -5,13 +5,26 @@ int sumDigits(int number) {
   // write your solution here...
   // Hint: Use modulo (%) to get last digit and division (/) to remove last
   // digit Hint: Handle negative numbers appropriately
-  return 0;
+  int sum = 0;
+  int temp = std :: abs(number);
+  int last_digit;
+  while (temp != 0)
+  {
+    last_digit = temp % 10;
+    sum = sum + last_digit;
+    temp = temp/10;
+  }
+
+  
+  
+  return sum;
 }
 
 int main() {
   std::cout << "==============================================\n";
   std::cout << "       DIGIT SUMMATION CALCULATOR\n";
   std::cout << "==============================================\n\n";
+
 
   // Test the sumDigits function
   // Test single digit numbers

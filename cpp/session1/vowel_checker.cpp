@@ -5,7 +5,22 @@ bool isVowel(char letter) {
   // write your solution here...
   // Hint: Check if the letter is 'a', 'e', 'i', 'o', 'u' (both uppercase and
   // lowercase)
-  return false;
+  char arr[10] = {'a', 'i', 'e', 'o', 'u', 'A','I','E','O','U'};
+  int i = 0;
+  bool ret;
+  for(i=0; i< 10 ; i++)
+  {
+    if(letter == arr[i])
+    {
+      ret = true;
+      break;
+    }
+    else
+    {
+      ret = false;
+    }
+  }
+  return ret;
 }
 
 int main() {
