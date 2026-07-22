@@ -5,7 +5,21 @@
 bool isRightTriangle(int a, int b, int c) {
   // write your solution here...
   // Hint: Use Pythagorean theorem: a² + b² = c² (where c is the largest side)
-  return 0;
+  bool retval=false;
+  int hyp= std::max({a, b, c});
+  if(hyp == a)
+  {
+    retval = (b*b + c*c == a*a);
+  }
+  else if (hyp == b)
+  {
+    retval = (a*a + c*c == b*b);
+  }
+  else
+  {
+    retval = (a*a + b*b == c*c);
+  }
+  return retval;
 }
 
 int main() {
